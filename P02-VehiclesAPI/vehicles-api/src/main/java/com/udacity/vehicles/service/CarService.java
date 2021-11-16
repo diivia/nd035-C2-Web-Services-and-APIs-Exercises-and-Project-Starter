@@ -86,7 +86,7 @@ public class CarService {
      * @return the new/updated car is stored in the repository
      */
     public Car save(Car car) {
-        if (car.getId() != null) {
+        if (car.getId() != null && repository.existsById(car.getId())) {
             return repository.findById(car.getId())
                     .map(carToBeUpdated -> {
                         carToBeUpdated.setDetails(car.getDetails());
@@ -120,3 +120,29 @@ public class CarService {
 
     }
 }
+
+/*
+{
+  "condition": "NEW",
+  "createdAt": "2019-09-17T14:34:28.043Z",
+  "details": {
+    "body": "sedan",
+    "engine": "3.6L V6",
+    "externalColor": "white",
+    "fuelType": "Gasoline",
+    "manufacturer": {
+      "code": 101,
+      "name": "Chevrolet"
+    },
+    "mileage": 32280,
+    "model": "Impala",
+    "modelYear": 2018,
+    "numberOfDoors": 4,
+    "productionYear": 2018
+  },
+  "location": {
+    "lat": 0,
+    "lon": 0
+  }
+}
+ */
